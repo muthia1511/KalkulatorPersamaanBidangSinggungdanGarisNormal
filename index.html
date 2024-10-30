@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perhitungan Persamaan Bidang Singgung dan Garis Normal</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb, #fbc2eb, #f7d6e0);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            padding: 0;
+            margin: 0;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .menu button {
+            padding: 15px 25px;
+            border: none;
+            color: #333;
+            background-color: #c2e9fb;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+
+        .menu button:hover {
+            background-color: #fbc2eb;
+        }
+
+        .menu .active {
+            background-color: #f9a8d4;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #555;
+            font-family: 'Arial Black', Gadget, sans-serif;
+            font-size: 2em;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.8;
+        }
+
+        form label, form input {
+            font-size: 1.1em;
+            display: block;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        /* Perbaikan untuk layar kecil */
+        @media (max-width: 600px) {
+            .container {
+                max-width: 100%;
+                padding: 15px;
+                margin-top: 10px;
+            }
+
+            .menu {
+                flex-direction: column; /* Membuat menu vertikal pada layar kecil */
+                align-items: stretch; /* Membuat tombol memenuhi lebar */
+            }
+
+            .menu button {
+                width: 100%; /* Tombol memenuhi lebar layar */
+                margin-bottom: 10px; /* Jarak antar tombol */
+                padding: 10px 15px; /* Sesuaikan padding */
+                font-size: 1em; /* Sesuaikan ukuran font */
+            }
+
+            h1, h2 {
+                font-size: 1.5em; /* Ukuran judul lebih kecil */
+            }
+
+            p {
+                font-size: 1em; /* Ukuran paragraf lebih kecil */
+            }
+
+            form label, form input {
+                font-size: 1em; /* Ukuran form lebih kecil */
+            }
+
+            table {
+                display: block; /* Tabel bisa di-scroll jika terlalu lebar */
+                overflow-x: auto;
+            }
+
+            th, td {
+                font-size: 0.9em; /* Ukuran teks tabel lebih kecil */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Perhitungan Persamaan Bidang Singgung dan Garis Normal</h1>
+
+        <div class="menu">
+            <button onclick="showSection('pengenalan')">Pengenalan</button>
+            <button onclick="showSection('persamaanBidangSinggung')">Persamaan Bidang Singgung</button>
+            <button onclick="showSection('persamaanGarisNormal')">Persamaan Garis Normal</button>
+            <button onclick="showSection('kalkulator')" class="active">Kalkulator</button>
+        </div>
+
+        <div id="pengenalan" style="display:none;">
+            <h2>Pengenalan</h2>
+            <p>Bidang singgung dan garis normal adalah konsep penting dalam kalkulus multivariat yang berguna untuk memahami karakteristik permukaan pada titik tertentu. Bidang singgung memberikan gambaran tentang kemiringan permukaan, sedangkan garis normal menunjukkan arah yang tegak lurus terhadap permukaan tersebut. Kedua konsep ini memiliki banyak aplikasi dalam fisika, teknik, dan geometri ruang.</p>
+        </div>
+
+        <div id="persamaanBidangSinggung" style="display:none;">
+            <h2>Persamaan Bidang Singgung</h2>
+            <p>Persamaan bidang singgung pada suatu titik dalam ruang tiga dimensi adalah bidang yang menyentuh permukaan pada titik tersebut tanpa memotongnya. Bidang ini dapat dihitung menggunakan turunan parsial fungsi terhadap variabel \(x\), \(y\), dan \(z\).</p>
+            <p>Rumus umum untuk persamaan bidang singgung adalah:</p>
+            <p><em>fx</em> * (x - x₀) + <em>fy</em> * (y - y₀) + <em>fz</em> * (z - z₀) = 0</p>
+        </div>
+
+        <div id="persamaanGarisNormal" style="display:none;">
+            <h2>Persamaan Garis Normal</h2>
+            <p>Garis normal adalah garis yang tegak lurus terhadap bidang singgung pada titik tertentu di permukaan. Dengan turunan parsial dan titik yang diketahui, kita dapat merumuskan garis normal sebagai parameterisasi vektor:</p>
+            <p>x = x₀ + <em>fx</em> * t, y = y₀ + <em>fy</em> * t, z = z₀ + <em>fz</em> * t</p>
+        </div>
+
+        <div id="kalkulator">
+            <h2>Kalkulator Persamaan Bidang Singgung dan Garis Normal</h2>
+            <p>Masukkan fungsi dalam bentuk <strong>f(x, y, z)</strong> serta titik <strong>(x₀, y₀, z₀)</strong> untuk menghitung persamaan bidang singgung dan garis normal.</p>
+
+            <form id="calculator">
+                <table>
+                    <tr><td><label for="fungsi">Fungsi f(x, y, z):</label></td></tr>
+                    <tr><td><input type="text" id="fungsi" placeholder="Contoh: x^2 + y^2 + z^2"></td></tr>
+                    <tr><td><label for="x0">Nilai x₀:</label></td></tr>
+                    <tr><td><input type="number" id="x0" step="any"></td></tr>
+                    <tr><td><label for="y0">Nilai y₀:</label></td></tr>
+                    <tr><td><input type="number" id="y0" step="any"></td></tr>
+                    <tr><td><label for="z0">Nilai z₀:</label></td></tr>
+                    <tr><td><input type="number" id="z0" step="any"></td></tr>
+                    <tr><td><button type="button" onclick="hitungBidangGaris()">Hitung</button></td></tr>
+                </table>
+            </form>
+
+            <h2>Hasil:</h2>
+            <div id="output-container">
+                <table id="output-table">
+                    <thead>
+                        <tr><th>Persamaan Bidang Singgung</th><th>Persamaan Garis Normal</th></tr>
+                    </thead>
+                    <tbody id="output"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.getElementById('pengenalan').style.display = 'none';
+            document.getElementById('persamaanBidangSinggung').style.display = 'none';
+            document.getElementById('persamaanGarisNormal').style.display = 'none';
+            document.getElementById('kalkulator').style.display = 'none';
+
+            document.getElementById(sectionId).style.display = 'block';
+
+            let buttons = document.querySelectorAll('.menu button');
+            buttons.forEach(button => button.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function hitungBidangGaris() {
+            const fungsi = document.getElementById("fungsi").value;
+            const x0 = parseFloat(document.getElementById("x0").value);
+            const y0 = parseFloat(document.getElementById("y0").value);
+            const z0 = parseFloat(document.getElementById("z0").value);
+
+            const df_dx = math.derivative(fungsi, 'x').toString();
+            const df_dy = math.derivative(fungsi, 'y').toString();
+            const df_dz = math.derivative(fungsi, 'z').toString();
+
+            const fx = math.evaluate(df_dx, { x: x0, y: y0, z: z0 });
+            const fy = math.evaluate(df_dy, { x: x0, y: y0, z: z0 });
+            const fz = math.evaluate(df_dz, { x: x0, y: y0, z: z0 });
+            const bidangSinggung = `${fx} * (x - ${x0}) + ${fy} * (y - ${y0}) + ${fz} * (z - ${z0}) = 0`;
+            const garisNormal = `x = ${x0} + ${fx}*t, y = ${y0} + ${fy}*t, z = ${z0} + ${fz}*t`;
+
+            const row = document.createElement("tr");
+            row.innerHTML = `<td>${bidangSinggung}</td><td>${garisNormal}</td>`;
+            document.getElementById("output").appendChild(row);
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js"></script>
+</body>
+</html>
